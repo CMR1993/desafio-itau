@@ -13,14 +13,16 @@ public class TransactionService {
     private final List<Transaction> transactions = new ArrayList<>();
 
     public void addTransaction(@Valid TransactionDTO transactionDTO) {
-        Transaction transaction = new Transaction();
-        transaction.setValor(transactionDTO.getValor());
-        transaction.setDataHora(transactionDTO.getDataHora());
+        Transaction transaction = transactionDTO.toEntity();
         transactions.add(transaction);
     }
 
-    public List<Transaction> getAllTransactions(){
-        return transactions;
+    public List<TransactionDTO> getAllTransactions(){
+        List<TransactionDTO> dtos = new ArrayList<>();
+        for (Transaction transaction : transactions){
+            dtos.add(TransactionDTO.fromEntity(transaction));
+        }
+        return dtos;
     }
 
     public void deleteTransactions() {
