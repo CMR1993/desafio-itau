@@ -1,5 +1,6 @@
 package com.desafio.controle.financeiro.dto;
 
+import com.desafio.controle.financeiro.model.Transaction;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
@@ -19,4 +20,11 @@ public class TransactionDTO {
     @NotNull(message = "A data/hora não pode ser nula")
     private OffsetDateTime dataHora;
 
+    public Transaction toEntity(){
+        return new Transaction(valor,dataHora);
+    }
+
+    public static TransactionDTO fromEntity(Transaction transaction) {
+        return new TransactionDTO(transaction.getValor(),transaction.getDataHora());
+    }
 }

@@ -13,9 +13,7 @@ public class TransactionService {
     private final List<Transaction> transactions = new ArrayList<>();
 
     public void addTransaction(@Valid TransactionDTO transactionDTO) {
-        Transaction transaction = new Transaction();
-        transaction.setValor(transactionDTO.getValor());
-        transaction.setDataHora(transactionDTO.getDataHora());
+        Transaction transaction = transactionDTO.toEntity();
         transactions.add(transaction);
     }
 
