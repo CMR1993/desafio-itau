@@ -1,15 +1,11 @@
 package com.desafio.controle.financeiro.controller;
 
 import com.desafio.controle.financeiro.dto.TransactionDTO;
-import com.desafio.controle.financeiro.model.Transaction;
 import com.desafio.controle.financeiro.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.OffsetDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/transacao")
@@ -23,7 +19,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<TransactionDTO> insert(@Valid @RequestBody TransactionDTO transactionDTO) {
+    public ResponseEntity<TransactionDTO> receivedTransaction(@Valid @RequestBody TransactionDTO transactionDTO) {
        if (!transactionDTO.isValid()){
            return ResponseEntity.unprocessableEntity().build();
        }
@@ -31,9 +27,9 @@ public class TransactionController {
         return ResponseEntity.status(201).build();
     }
 
-    @GetMapping()
-    public List<TransactionDTO> findTransactions(){
-        List<TransactionDTO> transactions = transactionService.getAllTransactions();
-        return ResponseEntity.ok(transactions).getBody();
+    @DeleteMapping
+    public ResponseEntity<TransactionDTO> deleteTransactions(){
+        transactionService.deleteTransactions();
+        return ResponseEntity.ok().build();
     }
 }

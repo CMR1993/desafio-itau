@@ -14,4 +14,10 @@ public class Transaction {
 
     private double valor;
     private OffsetDateTime dataHora;
+    private OffsetDateTime dataHoraRegistro;
+
+    public Transaction(double valor, OffsetDateTime dataHora) {
+        this.valor = valor;
+        this.dataHora = dataHora;
+    }
 }
